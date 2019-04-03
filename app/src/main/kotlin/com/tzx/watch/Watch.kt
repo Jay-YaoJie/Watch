@@ -1,6 +1,5 @@
 package com.tzx.watch
 
-
 import android.support.multidex.MultiDexApplication
 import com.tzx.watch.filekts.DelegatesExt
 import org.greenrobot.eventbus.EventBus
@@ -9,8 +8,8 @@ import org.greenrobot.eventbus.EventBus
  * author : Jeff  5899859876@qq.com
  * Csdn :https://blog.csdn.net/Jeff_YaoJie
  * Github: https://github.com/Jay-YaoJie
- * Created :  2019-03-15.
- * description ： Application
+ * Created :  2019-04-03.
+ * description ：
  */
 class Watch : MultiDexApplication() {
     //companion静态声类声名对象，相当于static关键
@@ -26,6 +25,7 @@ class Watch : MultiDexApplication() {
         //创建一个 EventBus 实例对象
         var eBus: EventBus by DelegatesExt.notNullSingleValue<EventBus>();
     }
+
     override fun onCreate() {
         super.onCreate()
         instance = this;

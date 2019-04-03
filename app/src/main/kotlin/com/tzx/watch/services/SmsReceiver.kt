@@ -7,6 +7,7 @@ import android.provider.Telephony
 import android.telephony.SmsMessage
 import com.tzx.watch.Watch.Companion.instance
 import com.tzx.watch.filekts.LogUtils
+import com.tzx.watch.utils.ToastUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,7 +79,7 @@ class SmsReceiver : BroadcastReceiver() {
             LogUtils.d(tag, "短信来自:$address")
             LogUtils.d(tag, "短信内容:$body")
             LogUtils.d(tag, "短信时间:$time")
-
+            ToastUtil.show("短信内容:$body")
 
             //如果短信来自5556,不再往下传递,一般此号码可以作为短信平台的号码。
 //            if ("5556" == sender) {

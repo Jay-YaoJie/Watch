@@ -29,7 +29,7 @@ object SPUtil {
     ) {
         val settings = PreferenceManager
             .getDefaultSharedPreferences(instance)
-        settings.edit().putString(key, value).apply()
+        settings.edit().putString(key, value)//.apply()
     }
 
     fun setBoolean(
@@ -38,7 +38,7 @@ object SPUtil {
     ) {
         val settings = PreferenceManager
             .getDefaultSharedPreferences(instance)
-        settings.edit().putBoolean(key, value).apply()
+        settings.edit().putBoolean(key, value)//.apply()
     }
 
     fun getBoolean(
@@ -64,7 +64,7 @@ object SPUtil {
     ) {
         val settings = PreferenceManager
             .getDefaultSharedPreferences(instance)
-        settings.edit().putInt(key, value).apply()
+        settings.edit().putInt(key, value)//.apply()
     }
 
     fun getInt(
@@ -82,7 +82,7 @@ object SPUtil {
     ) {
         val settings = PreferenceManager
             .getDefaultSharedPreferences(instance)
-        settings.edit().putFloat(key, value).apply()
+        settings.edit().putFloat(key, value)//.apply()
     }
 
     fun getFloat(
@@ -100,7 +100,7 @@ object SPUtil {
     ) {
         val settings = PreferenceManager
             .getDefaultSharedPreferences(instance)
-        settings.edit().putLong(key, value).apply()
+        settings.edit().putLong(key, value)//.apply()
     }
 
     fun getLong(
@@ -117,6 +117,6 @@ object SPUtil {
     ) {
         val editor = p.edit()
         editor.clear()
-        editor.apply()
+       // editor.apply()
     }
 }

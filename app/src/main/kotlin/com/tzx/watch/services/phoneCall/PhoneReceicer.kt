@@ -7,6 +7,7 @@ import android.content.Intent
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import com.tzx.watch.filekts.LogUtils
+import com.tzx.watch.utils.ToastUtil
 
 
 /**
@@ -53,6 +54,7 @@ class PhoneReceicer : BroadcastReceiver() {
                 TelephonyManager.CALL_STATE_RINGING ->{
                     //输出来电号码
                     LogUtils.d(tag, "响铃:来电号码$incomingNumber")
+                    ToastUtil.show("响铃:来电号码$incomingNumber")
                 }
             }
         }

@@ -75,7 +75,7 @@ class Preference<T>(val context: Context, val name: String, val default: T) : Re
             is Long -> putLong(name, value)
             is Float -> putFloat(name, value)
             else -> throw IllegalArgumentException("this type not support")
-        }.apply()
+        }//.apply()
     }
 
 }
