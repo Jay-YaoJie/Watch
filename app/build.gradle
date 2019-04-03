@@ -1,0 +1,116 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.tzx.watch"
+        minSdkVersion 15
+        //targetSdkVersion 28
+        versionCode 100
+        versionName "v1.0.6"
+        //  //分包
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            //定义多个资源文件夹,这种情况下，两个资源文件夹具有相同优先级，即如果一个资源在两个文件夹都声明了，合并会报错。
+            java.srcDirs = ['src/main/java', 'src/main/kotlin']
+            res.srcDirs = ['src/main/res']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    //aapt配置
+    aaptOptions {
+        //防止检查9图时出现异常
+        cruncherEnabled = false
+        useNewCruncher = false
+        //不用压缩的文件
+        noCompress 'pak', 'dat', 'bin', 'notice'
+        //打包时候要忽略的文件
+        ignoreAssetsPattern "!.svn:!.git"
+        //分包
+//        multiDexEnabled true
+        //--extra-packages是为资源文件设置别名：意思是通过该应用包名+R，com.android.test1.R和com.android.test2.R都可以访问到资源
+        additionalParameters '--extra-packages', 'com.android.test1', '--extra-packages', 'com.android.test2'
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        //移除lint检查的error
+        abortOnError false
+        //禁止掉某些lint检查
+        disable 'NewApi'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'gdx production signature'
+            keyPassword 'gdx9234'
+            storeFile file('signature/prod.jks')
+            storePassword 'gdx9234'
+        }
+//        buildConfig {
+//            keyAlias 'gdx production signature'
+//            keyPassword 'gdx9234'
+//            storeFile file('E:/AndroidProject/prod.jks')
+//            storePassword 'gdx9234'
+//        }
+    }
+    buildTypes {
+        release {
+            //zipAlign 优化
+            zipAlignEnabled true
+            //移除无用 的 Resources 文件
+            // shrinkResources true
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
+            //开启混淆
+            minifyEnabled false
+            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            // signingConfig signingConfigs.releaseConfig
+        }
+    }
+    //Kotlin Android Extensions是另一个Kotlin团队研发的插件，让我们用更少的代码来开发程序 。
+    androidExtensions {
+        experimental = true
+    }
+}
+dependencies {
+    //默认加载包
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+}
+//引用其他包或框架
+apply from: "dependencies.gradle"
