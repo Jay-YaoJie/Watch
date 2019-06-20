@@ -1,5 +1,6 @@
 package com.tzx.watch
 
+import android.app.Application
 import android.support.multidex.MultiDexApplication
 import com.tzx.watch.filekts.DelegatesExt
 import org.greenrobot.eventbus.EventBus
@@ -9,9 +10,9 @@ import org.greenrobot.eventbus.EventBus
  * Csdn :https://blog.csdn.net/Jeff_YaoJie
  * Github: https://github.com/Jay-YaoJie
  * Created :  2019-04-03.
- * description ：
+ * description ： MultiDex
  */
-class Watch : MultiDexApplication() {
+class Watch : Application() {
     //companion静态声类声名对象，相当于static关键
     companion object {
         // 按照我们在Java中一样创建一个单例最简单的方式：

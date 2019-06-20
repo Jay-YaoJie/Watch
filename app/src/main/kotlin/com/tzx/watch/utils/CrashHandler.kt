@@ -38,7 +38,6 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
     companion object {
         //在静态区域内创建单例对象，在getInstantce这个方法中对对象加锁然后判断返回单例对象；
         private var mCrashHandler: CrashHandler? = null;
-
         fun getInit(): CrashHandler {
             if (mCrashHandler == null) {
                 synchronized(CrashHandler::class.java) {
